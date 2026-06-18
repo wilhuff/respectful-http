@@ -11,6 +11,7 @@ pub enum RequestOutcome {
 }
 
 /// Configuration for the rate limiter.
+#[derive(Clone, Copy, Debug)]
 pub struct RetryConfig {
     /// The steady-state interval between requests. This is the target rate
     /// derived from documented API limits (e.g., 4s for 15 req/min). The

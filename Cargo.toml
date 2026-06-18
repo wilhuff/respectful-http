@@ -1,0 +1,21 @@
+[package]
+name = "respectful-http"
+version = "0.1.0"
+edition = "2021"
+description = "Rate-limited HTTP client with respectful retry backoff"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/wilhuff/respectful-http"
+# Private repo for now: never accidentally publish to crates.io.
+publish = false
+
+[dependencies]
+async-trait = "0.1"
+# `form` is needed for `post_form` (urlencoded bodies); `rustls` matches both
+# consumers' TLS stack and avoids pulling native-tls/openssl.
+reqwest = { version = "0.13", default-features = false, features = ["rustls", "form"] }
+thiserror = "2"
+tokio = { version = "1", features = ["time"] }
+
+[dev-dependencies]
+# Test-only runtime bits: `#[tokio::test]` (macros + rt) and `start_paused` (test-util).
+tokio = { version = "1", features = ["macros", "rt", "test-util"] }
